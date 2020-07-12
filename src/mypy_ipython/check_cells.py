@@ -33,5 +33,6 @@ def output(stream, outputs):
 
 
 def check(cells: List[str]):
-    normal_report, error_report, status = mypy_api.run("\n".join(cells))
+    cells = ["from IPython import get_ipython"] + cells
+    normal_report, error_report, status = mypy_api.run(["-c", "\n".join(cells), "--ignore-missing-imports"])
     return lines(normal_report, error_report, status)
