@@ -1,4 +1,6 @@
-from typing import List, Dict, Any
+from __future__ import annotations
+
+from typing import List, Dict
 import attr
 import collections
 
@@ -30,3 +32,9 @@ class Recorder:
 
     def relevant_snippets(self):
         return list(self._record.values())
+
+
+def post_execute(
+    recorder: Recorder, shell: IPython.core.interactiveshell.InteractiveShell
+):
+    recorder.process(shell.history_manager.input_hist_parsed[-1])
