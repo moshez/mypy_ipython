@@ -2,6 +2,7 @@ MyPy/Jupyter Integration
 ========================
 
 Instructions:
+
 * Install this (for example,
   ``pip install git+https://github.com/moshez/mypy_ipython.git``)
   in the virtual environment your kernel is running
