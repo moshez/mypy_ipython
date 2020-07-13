@@ -11,5 +11,5 @@ Instructions:
   run ``%load_ext mypy_ipython``
   in a cell.
 * Whenever you need to check the types, run
-  `%mypy`
+  ``%mypy``
   in a cell.
