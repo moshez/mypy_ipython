@@ -7,5 +7,5 @@ Provides mypy_ipython version information.
 
 from incremental import Version
 
-__version__ = Version('mypy_ipython', 20, 7, 0)
+__version__ = Version("mypy_ipython", 20, 7, 0)
 __all__ = ["__version__"]
