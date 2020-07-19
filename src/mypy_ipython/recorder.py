@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import ast
 import collections
-from typing import Dict, TYPE_CHECKING
+from typing import Dict, Iterable, TYPE_CHECKING
 import attr
 
 if TYPE_CHECKING:
@@ -15,8 +15,8 @@ class Recorder:
     _running: int = attr.ib(init=False, default=0)
     _top_levels: Dict[str, int] = attr.ib(init=False, factory=dict)
 
-    def process(self, snippet):
-        def get_top_level():
+    def process(self, snippet: str) -> None:
+        def get_top_level() -> Iterable[str]:
             module = compile(snippet, "", "exec", ast.PyCF_ONLY_AST)
             for top_level in module.body:
                 if isinstance(top_level, (ast.ClassDef, ast.FunctionDef)):
@@ -35,11 +35,11 @@ class Recorder:
                     del self._record[snippet_id]
             self._top_levels[top_level] = self._running
 
-    def relevant_snippets(self):
+    def relevant_snippets(self) -> Iterable[str]:
         return list(self._record.values())
 
 
 def post_execute(
     recorder: Recorder, shell: IPython.core.interactiveshell.InteractiveShell
-):
+) -> None:
     recorder.process(shell.history_manager.input_hist_parsed[-1])
