@@ -29,3 +29,17 @@ def test_check():
     explanations.pop(0)
     assert len(explanations) <= 1
 
+def test_check_successful():
+    cells = list(map(textwrap.dedent, [
+    """\
+    from typing import List
+    def foo() -> int:
+        return 1
+    """]))
+    ret_value = list(check_cells.check(cells))
+    assert ret_value[-1][0] == check_cells.Severity.NORMAL 
+    ret_value.pop()
+    assert set(x[0] for x in ret_value) == {check_cells.Severity.NORMAL} 
+    assert ret_value[-1][1].startswith("Success")
+    ret_value.pop()
+    assert ret_value == []
