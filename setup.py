@@ -15,5 +15,8 @@ setuptools.setup(
     author_email="moshez@zadka.club",
     packages=setuptools.find_packages(where='src'),
     package_dir={"": "src"},
-    install_requires=['attrs', 'incremental'],
+    install_requires=['attrs', 'incremental', 'mypy'],
+    extras_require=dict(
+        test=["pytest", "coverage"],
+    )
 )
