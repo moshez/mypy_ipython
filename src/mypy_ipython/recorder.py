@@ -14,14 +14,14 @@ class Recorder:
 
     def process(self, snippet):
         def get_top_level():
-            try:
-                module = compile(snippet, "", "exec", ast.PyCF_ONLY_AST)
-            except SyntaxError:
-                return
+            module = compile(snippet, "", "exec", ast.PyCF_ONLY_AST)
             for top_level in module.body:
                 if isinstance(top_level, (ast.ClassDef, ast.FunctionDef)):
                     yield top_level.name
-
+        try:
+            all_top_levels = list(get_top_level())
+        except SyntaxError:
+            return
         self._running += 1
         self._record[self._running] = snippet
         for top_level in get_top_level():
