@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from typing import List, Iterable, Tuple
-
-from mypy import api as mypy_api
-
+import io
 import enum
 import re
+from typing import Iterable, Tuple, Mapping
+
+from mypy import api as mypy_api
 
 
 @enum.unique
@@ -40,14 +40,17 @@ def lines(
         yield Severity.ERROR, "Type checking failed"
 
 
-def output(stream, outputs):
+def output(
+    stream: Iterable[Tuple[Severity, str]], outputs: Mapping[Severity, io.TextIOBase]
+) -> None:
     for severity, content in stream:
         print(content, file=outputs[severity])
 
 
-def check(cells: List[str]):
-    cells = ["from IPython import get_ipython"] + cells
-    input_data = "\n".join(cells)
+def check(cells: Iterable[str]) -> Iterable[Tuple[Severity, str]]:
+    my_cells = ["from IPython import get_ipython"]
+    my_cells.extend(cells)
+    input_data = "\n".join(my_cells)
     normal_report, error_report, status = mypy_api.run(
         ["-c", input_data, "--ignore-missing-imports", "--show-error-context"]
     )

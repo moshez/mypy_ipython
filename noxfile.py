@@ -36,12 +36,12 @@ def tests(session):
 def lint(session):
     files = ["src/mypy_ipython", "noxfile.py", "setup.py"]
     session.install("-e", ".[lint]")
-    session.run("black", "--check", *files)
+    session.run("black", "--check", "--diff", *files)
     black_compat = ["--max-line-length=88", "--ignore=E203"]
     session.run("flake8", *black_compat, "src/mypy_ipython")
     session.run(
         "mypy",
-        #    "--disallow-untyped-defs",
+        "--disallow-untyped-defs",
         "--warn-unused-ignores",
         "--ignore-missing-imports",
         "src/mypy_ipython",
