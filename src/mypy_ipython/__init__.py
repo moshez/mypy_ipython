@@ -4,16 +4,15 @@ import sys
 from . import recorder, check_cells
 from ._version import __version__
 
-OUTPUT_TARGETS = {
-    check_cells.Severity.NORMAL: sys.stdout,
-    check_cells.Severity.ERROR: sys.stderr,
-}
-
 
 def check_recorded_cells(my_recorder, _ignored):
+    output_targets = {
+        check_cells.Severity.NORMAL: sys.stdout,
+        check_cells.Severity.ERROR: sys.stderr,
+    }
     snippets = my_recorder.relevant_snippets()
     results = check_cells.check(snippets)
-    check_cells.output(results, OUTPUT_TARGETS)
+    check_cells.output(results, output_targets)
 
 
 def load_ipython_extension(ipython):

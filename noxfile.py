@@ -5,6 +5,7 @@ import nox
 
 nox.options.envdir = "build/nox"
 
+
 @nox.session(python=["3.7", "3.8"])
 def tests(session):
     """Run test suite with pytest."""
@@ -12,31 +13,38 @@ def tests(session):
     session.install("-e", ".[test]")
     tests = session.posargs or ["src/mypy_ipython/tests"]
     session.run(
-        "coverage", "run", "--source=src/mypy_ipython",
-        "-m", "pytest", *tests,
+        "coverage",
+        "run",
+        "--source=src/mypy_ipython",
+        "-m",
+        "pytest",
+        *tests,
         env=dict(COVERAGE_FILE=os.path.join(tmpdir, "coverage")),
     )
     fail_under = "--fail-under=100"
-    session.run("coverage", "report", fail_under, "--show-missing",
+    session.run(
+        "coverage",
+        "report",
+        fail_under,
+        "--show-missing",
         "--skip-covered",
         env=dict(COVERAGE_FILE=os.path.join(tmpdir, "coverage")),
     )
-    session.notify("cover")
 
 
 @nox.session(python="3.8")
 def lint(session):
-    session.install("flake8==3.7.8", "black==19.3b0", "mypy==0.720")
+    files = ["src/mypy_ipython", "noxfile.py", "setup.py"]
+    session.install("-e", ".[lint]")
+    session.run("black", "--check", *files)
+    session.run("flake8", "--max-line-length=88", "src/mypy_ipyton")
     session.run(
         "mypy",
-        "--disallow-untyped-defs",
+        #    "--disallow-untyped-defs",
         "--warn-unused-ignores",
         "--ignore-missing-imports",
         "src/mypy_ipython",
     )
-    files = ["src/mypy_python", "noxfile.py", "setup.py"]
-    session.run("black", "--check", *files)
-    session.run("flake8", "--max-line-length=88", "src/mypy_ipyton")
 
 
 @nox.session(python="3.8")

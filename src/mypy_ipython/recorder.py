@@ -18,6 +18,7 @@ class Recorder:
             for top_level in module.body:
                 if isinstance(top_level, (ast.ClassDef, ast.FunctionDef)):
                     yield top_level.name
+
         try:
             all_top_levels = list(get_top_level())
         except SyntaxError:
