@@ -34,8 +34,9 @@ def lines(
         offending_line = input_lines[idx][:50]
         yield Severity.NORMAL, "    " + offending_line
         yield Severity.NORMAL, line[match.end() + 1 :].strip()
-    for line in error_report.splitlines():
-        yield Severity.ERROR, line
+    if error_report != '': # pragma: no cover
+        raise ValueError("mypy running problem, this is probably a bug",
+                         error_report)
     if status == 0:
         yield Severity.NORMAL, "Type checking successful"
     else:

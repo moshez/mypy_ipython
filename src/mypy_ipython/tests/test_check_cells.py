@@ -1,5 +1,6 @@
 from mypy_ipython import check_cells
 
+import io
 import textwrap
 
 def test_check():
@@ -43,3 +44,9 @@ def test_check_successful():
     assert ret_value[-1][1].startswith("Success")
     ret_value.pop()
     assert ret_value == []
+
+
+def test_output():
+    outputs = {check_cells.Severity.NORMAL: io.StringIO()}
+    check_cells.output([(check_cells.Severity.NORMAL, "hello")], outputs)
+    assert outputs[check_cells.Severity.NORMAL].getvalue() == "hello\n"
