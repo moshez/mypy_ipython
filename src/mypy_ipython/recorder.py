@@ -6,7 +6,7 @@ from typing import Dict, Iterable, TYPE_CHECKING
 import attr
 
 if TYPE_CHECKING:
-    import IPython
+    import IPython  # pragma: no cover
 
 
 @attr.s(auto_attribs=True)
