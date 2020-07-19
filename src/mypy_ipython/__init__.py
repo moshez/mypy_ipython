@@ -24,3 +24,6 @@ def load_ipython_extension(ipython):
         magic_kind="line",
         magic_name="mypy",
     )
+
+
+__all__ = ["load_python_extension", "__version__"]

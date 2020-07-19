@@ -2,8 +2,11 @@ from __future__ import annotations
 
 import ast
 import collections
-from typing import List, Dict
+from typing import Dict, TYPE_CHECKING
 import attr
+
+if TYPE_CHECKING:
+    import IPython
 
 
 @attr.s(auto_attribs=True)
@@ -25,7 +28,7 @@ class Recorder:
             return
         self._running += 1
         self._record[self._running] = snippet
-        for top_level in get_top_level():
+        for top_level in all_top_levels:
             if top_level in self._top_levels:
                 snippet_id = self._top_levels[top_level]
                 if snippet_id in self._record:

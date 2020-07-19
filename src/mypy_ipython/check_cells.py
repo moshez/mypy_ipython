@@ -6,7 +6,6 @@ from mypy import api as mypy_api
 
 import enum
 import re
-import sys
 
 
 @enum.unique
@@ -29,7 +28,6 @@ def lines(
         if not match:
             yield Severity.NORMAL, line.strip()
             continue
-        line_num = match.group()
         idx = int(match.group()) - 1
         offending_line = input_lines[idx][:50]
         yield Severity.NORMAL, "    " + offending_line
