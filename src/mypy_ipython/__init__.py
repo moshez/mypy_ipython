@@ -2,6 +2,7 @@ import functools
 import sys
 
 from . import recorder, check_cells
+from ._version import __version__
 
 OUTPUT_TARGETS = {
     check_cells.Severity.NORMAL: sys.stdout,
