@@ -1,0 +1,41 @@
+name: Python Pull Request Workflow
+on: [pull_request]
+jobs:
+    test:
+       name: Test
+       runs-on: ubuntu-latest
+       strategy: 
+            matrix:
+                python-version: [3.7, 3.8]
+
+       steps:
+           - uses: actions/checkout@v2
+           - name: Set up Python ${{ matrix.python-version }}
+             uses: actions/setup-python@v2
+             with:
+               python-version: ${{ matrix.python-version }}
+           - name: Install nox
+             run: |
+                 pip install nox
+           - name: Test
+             run: |
+                 nox -e tests-${{ matrix.python-version }}
+    lint:
+       name: Lint
+       runs-on: ubuntu-latest
+       strategy: 
+            matrix:
+                python-version: [3.8]
+
+       steps:
+           - uses: actions/checkout@v2
+           - name: Set up Python ${{ matrix.python-version }}
+             uses: actions/setup-python@v2
+             with:
+               python-version: ${{ matrix.python-version }}
+           - name: Install nox
+             run: |
+                 pip install nox
+           - name: Lint
+             run: |
+                 nox -e lint

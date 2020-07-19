@@ -1,12 +1,11 @@
 from __future__ import annotations
 
-from typing import List, Iterable, Tuple
-
-from mypy import api as mypy_api
-
+import io
 import enum
 import re
-import sys
+from typing import Iterable, Tuple, Mapping
+
+from mypy import api as mypy_api
 
 
 @enum.unique
@@ -19,7 +18,7 @@ DIGITS = re.compile(r"\d+")
 
 
 def lines(
-    normal_report: str, error_report: str, status: str, input_data: str
+    normal_report: str, error_report: str, status: int, input_data: str
 ) -> Iterable[Tuple[Severity, str]]:
     input_lines = input_data.splitlines()
     for line in normal_report.splitlines():
@@ -29,27 +28,29 @@ def lines(
         if not match:
             yield Severity.NORMAL, line.strip()
             continue
-        line_num = match.group()
         idx = int(match.group()) - 1
         offending_line = input_lines[idx][:50]
         yield Severity.NORMAL, "    " + offending_line
         yield Severity.NORMAL, line[match.end() + 1 :].strip()
-    for line in error_report.splitlines():
-        yield Severity.ERROR, line
+    if error_report != "":  # pragma: no cover
+        raise ValueError("mypy running problem, this is probably a bug", error_report)
     if status == 0:
         yield Severity.NORMAL, "Type checking successful"
     else:
         yield Severity.ERROR, "Type checking failed"
 
 
-def output(stream, outputs):
+def output(
+    stream: Iterable[Tuple[Severity, str]], outputs: Mapping[Severity, io.TextIOBase]
+) -> None:
     for severity, content in stream:
         print(content, file=outputs[severity])
 
 
-def check(cells: List[str]):
-    cells = ["from IPython import get_ipython"] + cells
-    input_data = "\n".join(cells)
+def check(cells: Iterable[str]) -> Iterable[Tuple[Severity, str]]:
+    my_cells = ["from IPython import get_ipython"]
+    my_cells.extend(cells)
+    input_data = "\n".join(my_cells)
     normal_report, error_report, status = mypy_api.run(
         ["-c", input_data, "--ignore-missing-imports", "--show-error-context"]
     )
