@@ -18,7 +18,7 @@ DIGITS = re.compile(r"\d+")
 
 
 def lines(
-    normal_report: str, error_report: str, status: str, input_data: str
+    normal_report: str, error_report: str, status: int, input_data: str
 ) -> Iterable[Tuple[Severity, str]]:
     input_lines = input_data.splitlines()
     for line in normal_report.splitlines():
