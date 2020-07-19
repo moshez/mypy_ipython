@@ -12,18 +12,16 @@ def tests(session):
     session.install("-e", ".[test]")
     tests = session.posargs or ["src/mypy_ipython/tests"]
     session.run(
-        "coverage", "run", "-m", "pytest", *tests,
+        "coverage", "run", "--source=src/mypy_ipython",
+        "-m", "pytest", *tests,
+        env=dict(COVERAGE_FILE=os.path.join(tmpdir, "coverage")),
+    )
+    fail_under = "--fail-under=100"
+    session.run("coverage", "report", fail_under, "--show-missing",
+        "--skip-covered",
         env=dict(COVERAGE_FILE=os.path.join(tmpdir, "coverage")),
     )
     session.notify("cover")
-
-@nox.session
-def cover(session):
-    """Coverage analysis."""
-    session.install("coverage")
-    fail_under = "--fail-under=100"
-    session.run("coverage", "report", fail_under, "--show-missing")
-    session.run("coverage", "erase")
 
 
 @nox.session(python="3.8")
