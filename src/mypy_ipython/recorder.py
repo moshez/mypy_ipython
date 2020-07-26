@@ -39,6 +39,13 @@ class Recorder:
         return list(self._record.values())
 
 
+def consume_history(
+    recorder: Recorder, shell: IPython.core.interactiveshell.InteractiveShell
+) -> None:
+    for cell in shell.history_manager.input_hist_parsed:
+        recorder.process(cell)
+
+
 def post_execute(
     recorder: Recorder, shell: IPython.core.interactiveshell.InteractiveShell
 ) -> None:

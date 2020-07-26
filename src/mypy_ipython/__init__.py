@@ -22,6 +22,7 @@ def load_ipython_extension(
     ipython: IPython.core.interactiveshell.InteractiveShell,
 ) -> None:
     my_recorder = recorder.Recorder()
+    recorder.consume_history(my_recorder, ipython)
     my_post_execute = functools.partial(recorder.post_execute, my_recorder, ipython)
     ipython.events.register("post_execute", my_post_execute)
     ipython.register_magic_function(
