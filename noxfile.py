@@ -46,3 +46,27 @@ def lint(session):
         "--ignore-missing-imports",
         "src/mypy_ipython",
     )
+
+
+@nox.session(python="3.8")
+def docs(session):
+    """Build the documentation."""
+    output_dir = os.path.abspath(os.path.join(session.create_tmp(), "output"))
+    doctrees, html = map(
+        functools.partial(os.path.join, output_dir), ["doctrees", "html"]
+    )
+    session.run("rm", "-rf", output_dir, external=True)
+    session.install(".[doc]")
+    session.install("sphinx-autobuild")
+    sphinx_args = ["-b", "html", "-W", "-d", doctrees, ".", html]
+
+
+    if not session.interactive:
+        sphinx_cmd = "sphinx-build"
+    else:
+        sphinx_cmd = "sphinx-autobuild"
+        sphinx_args.insert(0, "--open-browser")
+
+    session.cd("doc")
+    session.run(sphinx_cmd, *sphinx_args)
+

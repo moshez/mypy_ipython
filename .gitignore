@@ -1,5 +1,5 @@
 /.eggs
 .ipynb_checkpoints
-*.ipynb
 *.egg-info
 __pycache__
+/build
