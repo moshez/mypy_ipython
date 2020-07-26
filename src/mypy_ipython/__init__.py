@@ -1,7 +1,6 @@
 import functools
-import io
 import sys
-from typing import Any, Dict
+from typing import Any, Mapping
 
 import IPython
 
@@ -10,10 +9,9 @@ from ._version import __version__
 
 
 def check_recorded_cells(my_recorder: recorder.Recorder, _ignored: Any) -> None:
-    # Ignoring problems because of https://github.com/python/typeshed/issues/1240#issuecomment-660716422 # noqa: E501
-    output_targets: Dict[check_cells.Severity, io.TextIOBase] = {
-        check_cells.Severity.NORMAL: sys.stdout,  # type: ignore
-        check_cells.Severity.ERROR: sys.stderr,  # type: ignore
+    output_targets: Mapping[check_cells.Severity, check_cells.WritableTextFile] = {
+        check_cells.Severity.NORMAL: sys.stdout,
+        check_cells.Severity.ERROR: sys.stderr,
     }
     snippets = my_recorder.relevant_snippets()
     results = check_cells.check(snippets)
