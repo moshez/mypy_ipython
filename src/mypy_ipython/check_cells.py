@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-import io
 import enum
 import re
 from typing import Iterable, Tuple, Mapping
+from typing_extensions import Protocol
 
 from mypy import api as mypy_api
 
@@ -40,8 +40,13 @@ def lines(
         yield Severity.ERROR, "Type checking failed"
 
 
+class WritableTextFile(Protocol):
+    def write(self, content: str) -> int:
+        """Write a string."""
+
+
 def output(
-    stream: Iterable[Tuple[Severity, str]], outputs: Mapping[Severity, io.TextIOBase]
+    stream: Iterable[Tuple[Severity, str]], outputs: Mapping[Severity, WritableTextFile]
 ) -> None:
     for severity, content in stream:
         print(content, file=outputs[severity])
