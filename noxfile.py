@@ -60,7 +60,6 @@ def docs(session):
     session.install("sphinx-autobuild")
     sphinx_args = ["-b", "html", "-W", "-d", doctrees, ".", html]
 
-
     if not session.interactive:
         sphinx_cmd = "sphinx-build"
     else:
@@ -69,4 +68,3 @@ def docs(session):
 
     session.cd("doc")
     session.run(sphinx_cmd, *sphinx_args)
-
