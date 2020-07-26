@@ -19,6 +19,7 @@ def test_load_ipython_extension():
     output = temp_stdout.getvalue()
     assert output.startswith("Success")
 
+
 def test_load_ipython_extension_with_history():
     ipython = mock.MagicMock()
     ipython.history_manager.input_hist_parsed = ["x: int = 1\n"]
