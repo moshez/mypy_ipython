@@ -39,3 +39,26 @@ jobs:
            - name: Lint
              run: |
                  nox -e lint
+    docs:
+       name: Docs
+       runs-on: ubuntu-latest
+       strategy: 
+            matrix:
+                python-version: [3.8]
+
+       steps:
+           - uses: actions/checkout@v2
+           - name: Set up Python ${{ matrix.python-version }}
+             uses: actions/setup-python@v2
+             with:
+               python-version: ${{ matrix.python-version }}
+           - name: Install pandoc
+             run: |
+                 sudo apt-get update -y
+                 sudo apt-get install -y pandoc
+           - name: Install nox
+             run: |
+                 pip install nox
+           - name: Docs
+             run: |
+                 nox -e docs
