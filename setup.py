@@ -1,8 +1,7 @@
 import setuptools
 
-# with open('README.rst') as fp:
-#    long_description = fp.read()
-long_description = ""
+with open('README.rst') as fp:
+   long_description = fp.read()
 
 setuptools.setup(
     name="mypy_ipython",
@@ -21,4 +20,9 @@ setuptools.setup(
         lint=["black", "flake8", "mypy"],
         doc=["sphinx", "nbsphinx"],
     ),
+    url="https://github.com/moshez/mypy_ipython",
+    project_urls={
+        "Documentation": "https://mypy.readthedocs.io/en/stable/",
+        "Source": "https://github.com/moshez/mypy_ipython",
+    },
 )
