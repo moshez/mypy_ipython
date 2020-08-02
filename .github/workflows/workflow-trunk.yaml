@@ -2,10 +2,10 @@ name: Python Pull Request Workflow
 on:
   push:
     branches:
-      - master
+      - trunk
   pull_request:
     branches:
-      - master
+      - trunk
 jobs:
     test:
        name: Test
