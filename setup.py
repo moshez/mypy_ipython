@@ -1,7 +1,7 @@
 import setuptools
 
-with open('README.rst') as fp:
-   long_description = fp.read()
+with open("README.rst") as fp:
+    long_description = fp.read()
 
 setuptools.setup(
     name="mypy_ipython",
