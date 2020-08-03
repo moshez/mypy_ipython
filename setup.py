@@ -22,7 +22,7 @@ setuptools.setup(
     ),
     url="https://github.com/moshez/mypy_ipython",
     project_urls={
-        "Documentation": "https://mypy.readthedocs.io/en/stable/",
+        "Documentation": "https://mypy-ipython.readthedocs.io/en/latest/",
         "Source": "https://github.com/moshez/mypy_ipython",
     },
 )

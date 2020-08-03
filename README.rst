@@ -1,15 +1,31 @@
 MyPy/Jupyter Integration
 ========================
 
-Instructions:
+`Full documentation`_
+
+.. _Full documentation: https://mypy-ipython.readthedocs.io/en/latest/
+
+Quick Start
+-----------
 
 * Install this (for example,
-  ``pip install git+https://github.com/moshez/mypy_ipython.git``)
+  ``pip install mypy-ipython``)
   in the virtual environment your kernel is running
   (usually the same virtual environment Jupyter is running).
-* In a notebook, as early as possible,
-  run ``%load_ext mypy_ipython``
-  in a cell.
+* Run
+  ``%load_ext mypy_ipython``
+  in a notebook cell.
 * Whenever you need to check the types, run
   ``%mypy``
   in a cell.
+
+Contributing
+------------
+
+* All contributions must follow our Code of Conduct.
+* In your first pull request, please add yourself to the contributor list.
+
+Contributors
+------------
+
+* Moshe Zadka <moshez@zadka.club>
