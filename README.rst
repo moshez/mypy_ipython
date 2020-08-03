@@ -1,7 +1,10 @@
 MyPy/Jupyter Integration
 ========================
 
-Instructions:
+[Full documentation](https://mypy-ipython.readthedocs.io/en/latest/)
+
+Quick Start
+-----------
 
 * Install this (for example,
   ``pip install mypy-ipython``)
@@ -13,3 +16,8 @@ Instructions:
 * Whenever you need to check the types, run
   ``%mypy``
   in a cell.
+
+Contributors
+------------
+
+* Moshe Zadka <moshez@zadka.club>
