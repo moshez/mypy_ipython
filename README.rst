@@ -1,7 +1,9 @@
 MyPy/Jupyter Integration
 ========================
 
-[Full documentation](https://mypy-ipython.readthedocs.io/en/latest/)
+`Full documentation`_
+
+.. _Full documentation: https://mypy-ipython.readthedocs.io/en/latest/)
 
 Quick Start
 -----------
