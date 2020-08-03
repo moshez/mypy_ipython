@@ -17,6 +17,12 @@ Quick Start
   ``%mypy``
   in a cell.
 
+Contributing
+------------
+
+* All contributions must follow our Code of Conduct.
+* In your first pull request, please add yourself to the contributor list.
+
 Contributors
 ------------
 
