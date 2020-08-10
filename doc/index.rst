@@ -6,6 +6,7 @@ MyPy IPython
    :maxdepth: 2
 
    demo
+   example
 
 Type check your Jupyter notebooks!
 
