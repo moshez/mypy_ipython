@@ -8,6 +8,10 @@ MyPy/Jupyter Integration
 Installing
 ----------
 
+Note that this needs to be installed in the environment
+that your kernel is running in.
+This will usually be the environment running your Jupyter server.
+
 pip
 ~~~
 
@@ -23,10 +27,6 @@ Anaconda
     $ conda install -c laura-dietz mypy-ipython
 
 Via `anaconda cloud <https://anaconda.org/laura-dietz/mypy-ipython>`_.
-
-Note that this needs to be installed in the environment
-that your kernel is running in.
-This will usually be the environment running your Jupyter server.
 
 Quick Start
 -----------
