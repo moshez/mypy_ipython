@@ -22,6 +22,7 @@ Anaconda
 
     $ conda install -c laura-dietz mypy-ipython
 
+Via `anaconda cloud <https://anaconda.org/laura-dietz/mypy-ipython>`_.
 
 Quick Start
 -----------
