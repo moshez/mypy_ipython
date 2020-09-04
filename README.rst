@@ -24,13 +24,13 @@ Anaconda
 
 Via `anaconda cloud <https://anaconda.org/laura-dietz/mypy-ipython>`_.
 
+Note that this needs to be installed in the environment
+that your kernel is running in.
+This will usually be the environment running your Jupyter server.
+
 Quick Start
 -----------
 
-* Install this (for example,
-  ``pip install mypy-ipython``)
-  in the virtual environment your kernel is running
-  (usually the same virtual environment Jupyter is running).
 * Run
   ``%load_ext mypy_ipython``
   in a notebook cell.
