@@ -5,6 +5,24 @@ MyPy/Jupyter Integration
 
 .. _Full documentation: https://mypy-ipython.readthedocs.io/en/latest/
 
+Installing
+----------
+
+pip
+~~~
+
+.. code::
+
+    $ pip install mypy_ipython
+
+Anaconda
+~~~~~~~~
+
+.. code::
+
+    $ conda install -c laura-dietz mypy-ipython
+
+
 Quick Start
 -----------
 
@@ -28,4 +46,5 @@ Contributing
 Contributors
 ------------
 
-* Moshe Zadka <moshez@zadka.club>
+* `Moshe Zadka <moshez@zadka.club>`_
+* `Laura Dietz`
