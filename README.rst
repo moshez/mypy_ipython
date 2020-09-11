@@ -5,13 +5,32 @@ MyPy/Jupyter Integration
 
 .. _Full documentation: https://mypy-ipython.readthedocs.io/en/latest/
 
+Installing
+----------
+
+Note that this needs to be installed in the environment
+that your kernel is running in.
+This will usually be the environment running your Jupyter server.
+
+pip
+~~~
+
+.. code::
+
+    $ pip install mypy_ipython
+
+Anaconda
+~~~~~~~~
+
+.. code::
+
+    $ conda install -c laura-dietz mypy-ipython
+
+Via `anaconda cloud <https://anaconda.org/laura-dietz/mypy-ipython>`_.
+
 Quick Start
 -----------
 
-* Install this (for example,
-  ``pip install mypy-ipython``)
-  in the virtual environment your kernel is running
-  (usually the same virtual environment Jupyter is running).
 * Run
   ``%load_ext mypy_ipython``
   in a notebook cell.
@@ -28,4 +47,5 @@ Contributing
 Contributors
 ------------
 
-* Moshe Zadka <moshez@zadka.club>
+* `Moshe Zadka <moshez@zadka.club>`_
+* `Laura Dietz`
